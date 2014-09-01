@@ -1,3 +1,4 @@
 *.pyc
 MANIFEST
 dist/
+github_list_issues.egg-info/
