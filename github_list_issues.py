@@ -4,7 +4,7 @@ import getpass
 import json
 import logging
 import os
-from urllib.request import (Request, HTTPSHandler, build_opener,
+from urllib.request import (HTTPSHandler, build_opener,
                             HTTPPasswordMgrWithDefaultRealm)
 
 from urllib2_prior_auth import HTTPBasicPriorAuthHandler
@@ -23,8 +23,6 @@ git_password = conf_pars.get('github', 'password')
 if git_password is None:
     raise ValueError('Missing credentials!')
 
-req = Request("https://api.github.com")
-
 pwd_manager = HTTPPasswordMgrWithDefaultRealm()
 pwd_manager.add_password(None, 'https://api.github.com',
                          git_user, git_password)
@@ -39,5 +37,4 @@ api_stream = opener.open('https://api.github.com/issues')
 iss = json.loads(api_stream.read().decode())
 
 for i in iss:
-    title = i['title']
-    print("%s // %s:\n%s\n" % (i['repository']['name'], title, i['url']))
+    print("%s // %s:\n%s\n" % (i['repository']['name'], i['title'], i['url']))
