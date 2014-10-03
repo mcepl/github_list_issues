@@ -57,4 +57,5 @@ api_stream = opener.open('https://api.github.com/issues')
 iss = json.loads(api_stream.read().decode())
 
 for i in iss:
-    print("%s // %s:\n%s\n" % (i['repository']['name'], i['title'], i['url']))
+    url = i['url'].replace('api.','').replace('repos/', '')
+    print("%s // %s:\n%s\n" % (i['repository']['name'], i['title'], url))
